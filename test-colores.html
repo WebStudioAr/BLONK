@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLONK · Test de color de prenda</title>
+<!--
+  PÁGINA DE PRUEBA — se puede borrar cuando ya no haga falta.
+
+  Renderiza las dos prendas base en todos sus colores con EXACTAMENTE el mismo
+  sistema del configurador: tres capas, máscara alfa y mix-blend-mode: multiply.
+  No hay canvas, así que también funciona abriendo el archivo con file://.
+
+  Arriba hay un test rápido (#ff0000, y después rojo/verde/azul/natural/negro)
+  que es el criterio de aceptación: si los cinco no se ven radicalmente
+  distintos, el sistema está mal.
+-->
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  body { margin:0; background:#121110; color:#F2F0EB;
+         font:400 15px/1.5 system-ui, sans-serif; padding:32px; }
+  h1 { font-size:1.4rem; margin:0 0 4px; }
+  h2 { font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+       color:#E3A51A; margin:38px 0 14px; }
+  p  { color:rgba(242,240,235,.6); margin:0 0 10px; max-width:74ch; font-size:.9rem; }
+  code { background:rgba(242,240,235,.08); padding:1px 5px; border-radius:3px; font-size:.85em; }
+
+  .grilla { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:14px; }
+  figure { margin:0; background:#0C0B0B; border:1px solid rgba(242,240,235,.1);
+           border-radius:4px; overflow:hidden; }
+  /* La preview vive tal cual sale de styles.css; acá solo se le da lugar. */
+  figure .garment-preview { padding:6px; }
+  figcaption { padding:8px 10px; font-size:.78rem; display:flex;
+               justify-content:space-between; gap:8px; align-items:center; }
+  figcaption b { font-weight:600; }
+  figcaption span { color:rgba(242,240,235,.45); font-variant-numeric:tabular-nums; }
+  figcaption i { width:12px; height:12px; border-radius:50%; display:inline-block; }
+
+  .barra { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 6px; }
+  .barra button { font:inherit; font-size:.82rem; cursor:pointer;
+                  background:#1E1C1A; color:#F2F0EB; border:1px solid rgba(242,240,235,.2);
+                  border-radius:3px; padding:7px 12px; }
+  .barra button:hover { border-color:#E3A51A; }
+</style>
+</head>
+<body>
+
+<h1>Test de color de prenda</h1>
+<p>Las dos prendas base son blancas con fondo transparente. El color es la capa
+de abajo, recortada con la máscara alfa del propio PNG; la foto va encima en
+<code>mix-blend-mode: multiply</code>. Si cada color se ve realmente distinto y
+todavía se le notan pliegues y costuras, el sistema está bien.</p>
+
+<h2>Prueba rápida · criterio de aceptación</h2>
+<p>Los botones llaman a <code>BLONK.setGarmentColor(preview, hex)</code>, que es
+la misma función que usan los swatches del configurador.</p>
+<div class="barra" id="barra"></div>
+<div class="grilla" id="g-rapido"></div>
+
+<h2>Remera — paleta completa</h2>
+<div class="grilla" id="g-remera"></div>
+
+<h2>Buzo — paleta completa</h2>
+<div class="grilla" id="g-buzo"></div>
+
+<script src="data/productos.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/prenda.js"></script>
+<script>
+(function () {
+  /* Arma una preview suelta con las tres capas, sin pasar por el
+     configurador entero. Devuelve el .garment-preview. */
+  function crearPreview(cfg, hex) {
+    var wrap = document.createElement('div');
+    wrap.className = 'garment-preview';
+    wrap.innerHTML =
+      '<div class="garment-color garment-color--' + cfg.id + '"></div>' +
+      '<img class="garment-texture" src="' + cfg.base + '" alt="">';
+    if (hex) window.BLONK.setGarmentColor(wrap, hex);
+    return wrap;
+  }
+
+  function tarjeta(cfg, nombre, hex) {
+    var fig = document.createElement('figure');
+    fig.appendChild(crearPreview(cfg, hex));
+    var cap = document.createElement('figcaption');
+    cap.innerHTML = '<b>' + nombre + '</b><span>' + hex +
+      ' <i style="background:' + hex + '"></i></span>';
+    fig.appendChild(cap);
+    return fig;
+  }
+
+  function pintarPaleta(clave, contId) {
+    var cfg = window.BLONK_DATA.CONFIGURADORES[clave];
+    var cont = document.getElementById(contId);
+    cfg.colores.forEach(function (c) {
+      cont.appendChild(tarjeta(cfg, c.nombre, c.hex));
+    });
+  }
+
+  /* --- Prueba rápida: las dos prendas, un color a la vez --- */
+  var CFG = window.BLONK_DATA.CONFIGURADORES;
+  var PRUEBAS = [
+    { nombre: 'Rojo puro (debug)', hex: '#ff0000' },
+    { nombre: 'Rojo',    hex: '#a9292f' },
+    { nombre: 'Verde',   hex: '#29503b' },
+    { nombre: 'Azul',    hex: '#315886' },
+    { nombre: 'Natural', hex: '#d2c1a4' },
+    { nombre: 'Negro',   hex: '#151515' },
+    { nombre: 'Blanco',  hex: '#f1f0eb' },
+    { nombre: 'Bordó',   hex: '#6c2431' },
+    { nombre: 'Celeste', hex: '#92b7d0' }
+  ];
+
+  var rapido = document.getElementById('g-rapido');
+  var vivas = [];
+  ['remera', 'buzo'].forEach(function (clave) {
+    var cfg = CFG[clave];
+    var fig = document.createElement('figure');
+    var pv = crearPreview(cfg, '#ff0000');
+    fig.appendChild(pv);
+    var cap = document.createElement('figcaption');
+    cap.innerHTML = '<b>' + clave + '</b><span data-hex>#ff0000</span>';
+    fig.appendChild(cap);
+    rapido.appendChild(fig);
+    vivas.push({ pv: pv, etiqueta: cap.querySelector('[data-hex]') });
+  });
+
+  var barra = document.getElementById('barra');
+  PRUEBAS.forEach(function (p) {
+    var b = document.createElement('button');
+    b.textContent = p.nombre;
+    b.addEventListener('click', function () {
+      vivas.forEach(function (v) {
+        window.BLONK.setGarmentColor(v.pv, p.hex);
+        v.etiqueta.textContent = p.hex;
+      });
+    });
+    barra.appendChild(b);
+  });
+
+  pintarPaleta('remera', 'g-remera');
+  pintarPaleta('buzo', 'g-buzo');
+})();
+</script>
+</body>
+</html>

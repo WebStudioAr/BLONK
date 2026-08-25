@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>BLONK · Estampados personalizados e indumentaria unisex</title>
+<meta name="description" content="Remeras y buzos unisex con estampado DTF de alta calidad. Diseños propios y estampados personalizados para personas, marcas, colegios y emprendimientos. Envíos a todo el país.">
+<meta name="theme-color" content="#0A0A0A">
+
+<!-- Open Graph. Cuando exista la imagen real, completar og:image y og:url. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BLONK">
+<meta property="og:title" content="BLONK · La facha no se compra, se imprime.">
+<meta property="og:description" content="Remeras y buzos unisex con estampado DTF de alta calidad. Tu diseño, tu estilo. Envíos a todo el país.">
+<meta property="og:locale" content="es_AR">
+<!-- TODO: <meta property="og:image" content="assets/og-blonk.jpg"> (1200×630) -->
+<!-- TODO: <meta property="og:url" content="https://DOMINIO-BLONK/"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Sedgwick+Ave&display=swap" rel="stylesheet">
+
+<!-- Marca que el JS esta vivo. Sin esto, los bloques con .reveal se muestran
+     directamente en vez de quedar ocultos esperando una animacion que no va a correr. -->
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<script src="data/productos.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/prenda.js" defer></script>
+<script src="js/cart.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ====================================================================== -->
+<!-- HEADER                                                                  -->
+<!-- ====================================================================== -->
+<header class="header" id="header">
+  <div class="header__inner">
+
+    <a class="logo" href="index.html" aria-label="BLONK, inicio">
+      <img src="assets/logo.png" width="1145" height="1374" alt="BLONK">
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="nav__link" href="catalogo.html">Catálogo</a>
+      <a class="nav__link" href="#personalizados">Personalizados</a>
+      <a class="nav__link" href="#config-remeras">Remeras</a>
+      <a class="nav__link" href="#config-buzos">Buzos</a>
+      <a class="nav__link" href="#como-pedir">Cómo pedir</a>
+    </nav>
+
+    <form class="header__buscador" data-busqueda role="search" action="catalogo.html" method="get">
+      <label class="visually-hidden" for="q-header">Buscar productos</label>
+      <input id="q-header" name="q" type="search" placeholder="Buscar productos…" autocomplete="off">
+      <button type="submit" aria-label="Buscar">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </form>
+
+    <div class="header__acciones">
+      <button class="btn btn--wsp btn--chico header__wsp" type="button"
+              data-wsp="Hola BLONK! Estoy en la web y quería hacerles una consulta.">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4a8.4 8.4 0 1 1 15.4-4.4z"/></svg>
+        WhatsApp
+      </button>
+
+      <button class="icon-btn btn-buscar-mobile" id="btn-buscar" type="button"
+              aria-label="Abrir buscador" aria-expanded="false" aria-controls="buscador-overlay">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+
+      <button class="icon-btn carrito-btn" type="button" data-carrito-abrir
+              aria-label="Abrir carrito, vacío" aria-controls="carrito">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.6 8.5a2 2 0 0 1-2 1.6H9.3a2 2 0 0 1-2-1.7L5.6 4H3"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="carrito-btn__contador" data-carrito-contador aria-hidden="true">0</span>
+      </button>
+
+      <button class="icon-btn hamburguesa" id="btn-menu" type="button"
+              aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-mobile">
+        <span class="hamburguesa__caja" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ---------------------------- MENÚ MOBILE ----------------------------- -->
+<div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="menu-mobile__top">
+    <span class="logo__word" style="font-size:1.5rem">BLONK</span>
+    <button class="icon-btn" type="button" data-cerrar-menu aria-label="Cerrar menú">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="menu-mobile__cuerpo">
+    <nav aria-label="Navegación mobile">
+      <a class="menu-mobile__link" href="catalogo.html" data-cerrar-menu>Catálogo
+        <svg class="flecha" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      <a class="menu-mobile__link" href="#personalizados" data-cerrar-menu>Personalizados
+        <svg class="flecha" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      <a class="menu-mobile__link" href="#config-remeras" data-cerrar-menu>Remeras
+        <svg class="flecha" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      <a class="menu-mobile__link" href="#config-buzos" data-cerrar-menu>Buzos
+        <svg class="flecha" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      <a class="menu-mobile__link" href="#como-pedir" data-cerrar-menu>Cómo pedir
+        <svg class="flecha" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+    </nav>
+
+    <div class="menu-mobile__pie">
+      <button class="btn btn--primario btn--bloque" type="button"
+              data-wsp="Hola BLONK! Estoy en la web y quería hacerles una consulta.">Hablemos por WhatsApp</button>
+      <div class="menu-mobile__redes">
+        <a class="btn" href="https://www.instagram.com/blonk_oficial_?igsi=OWl3OHhhdnZ4Y2xr" target="_blank" rel="noopener noreferrer" data-instagram>Instagram <span class="footer__handle" data-instagram-handle>@blonk_oficial_</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------- BUSCADOR (OVERLAY) ------------------------- -->
+<div class="buscador-overlay" id="buscador-overlay" role="dialog" aria-modal="true" aria-label="Buscar productos">
+  <div class="buscador-overlay__top">
+    <button class="icon-btn" type="button" data-cerrar-buscador aria-label="Cerrar buscador">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <form class="buscador-overlay__form" data-busqueda role="search" action="catalogo.html" method="get">
+    <label class="visually-hidden" for="q-overlay">¿Qué estás buscando?</label>
+    <input class="campo" id="q-overlay" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off">
+    <button class="btn btn--primario" type="submit">Buscar</button>
+  </form>
+  <div class="buscador-overlay__sug">
+    <h2>Búsquedas frecuentes</h2>
+    <div class="buscador-overlay__chips">
+      <button class="chip" type="button" data-chip-busqueda="remeras">Remeras</button>
+      <button class="chip" type="button" data-chip-busqueda="buzos">Buzos</button>
+      <button class="chip" type="button" data-chip-busqueda="conjuntos">Conjuntos</button>
+      <button class="chip" type="button" data-chip-busqueda="personalizados">Personalizados</button>
+      <button class="chip" type="button" data-chip-busqueda="argentina">Argentina</button>
+      <button class="chip" type="button" data-chip-busqueda="oversize">Oversize</button>
+    </div>
+  </div>
+</div>
+
+<main id="contenido">
+
+<!-- ====================================================================== -->
+<!-- 1. HERO                                                                 -->
+<!-- ====================================================================== -->
+<!-- HERO · acento: solo amarillo. Nada de verde ni rojo acá.
+     La pared pintada ya viene en la fotografía, así que no lleva graffiti SVG. -->
+<section class="hero textura-hormigon" aria-labelledby="hero-titulo">
+
+  <!-- Fondo a sangre (100% del viewport) solo en desktop.
+       La imagen se define en CSS: var(--img-hero) en :root. -->
+  <div class="hero__fondo" role="img"
+       aria-label="Taller BLONK: remera negra colgada sobre pared de hormigón, con prensa DTF al fondo."></div>
+
+  <div class="container--wide hero__inner">
+    <div class="hero__copy">
+      <p class="kicker reveal">Remeras que hablan por vos</p>
+
+      <h1 class="hero__titulo reveal reveal--d1" id="hero-titulo">
+        No compres<br>la facha.
+        <span class="linea-propia"><span class="brush">Imprimila.</span></span>
+      </h1>
+
+      <p class="hero__sub reveal reveal--d2">
+        Remeras, buzos y estampados personalizados con DTF de alta calidad.
+        Tu diseño, tu estilo. Envíos a todo el país.
+      </p>
+
+      <div class="hero__ctas reveal reveal--d2">
+        <a class="btn btn--primario btn--grande" href="catalogo.html">
+          Ver catálogo
+          <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--grande" href="#personalizados">
+          Hacer mi diseño
+          <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <p class="pill-envio reveal reveal--d3">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        Envíos a todo el país
+      </p>
+    </div>
+
+    <!-- Mobile: misma foto, recortada en vertical sobre la remera. -->
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 2. QUÉ HACE BLONK                                                       -->
+<!-- Composición editorial distinta al hero: foto a sangre + copy respirado. -->
+<!-- ====================================================================== -->
+<!-- QUÉ HACE BLONK · acento: verde muy oscuro, casi al ras del hormigón. -->
+<section class="quehace fondo-carbon seccion-verde" aria-labelledby="quehace-titulo">
+  <div class="quehace__grid">
+
+    <div class="quehace__media reveal">
+      <img src="assets/proceso-dtf.png" width="1415" height="1112"
+           alt="Persona acomodando un transfer DTF sobre una remera negra frente a la prensa de calor, con el cartel de neón BLONK al fondo"
+           loading="lazy">
+    </div>
+
+    <div class="quehace__copy">
+
+      <p class="kicker reveal">Qué hace BLONK</p>
+
+      <h2 class="titulo quehace__titulo reveal reveal--d1" id="quehace-titulo">
+        Transformamos ideas en prendas con
+        <span class="linea-propia"><span class="brush">identidad.</span></span>
+      </h2>
+
+      <p class="parrafo quehace__parrafo reveal reveal--d1">
+        Hacemos impresiones personalizadas sobre remeras y buzos unisex con DTF de alta calidad.
+        Trabajamos con personas, marcas, colegios, locales, emprendimientos e instituciones que
+        quieren una prenda con su propio estilo.
+      </p>
+
+      <div class="quehace__puntos reveal reveal--d2">
+        <div class="quehace__punto">
+          <h3>DTF de alta calidad</h3>
+          <p>Colores intensos, buena definición y terminación prolija sobre tela clara u oscura.</p>
+        </div>
+        <div class="quehace__punto">
+          <h3>Indumentaria unisex</h3>
+          <p>Remeras y buzos de calce cómodo, listos para estampar.</p>
+        </div>
+        <div class="quehace__punto">
+          <h3>Diseños personalizados</h3>
+          <p>Traés una idea, una frase o un logo y lo pasamos a la prenda.</p>
+        </div>
+        <div class="quehace__punto quehace__punto--verde">
+          <h3>Envíos a todo el país</h3>
+          <p>Llegamos a donde estés. El costo se calcula según destino.</p>
+        </div>
+      </div>
+
+      <div class="reveal reveal--d3">
+        <a class="btn btn--primario" href="#personalizados">
+          Cómo trabajamos
+          <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 3. CATEGORÍAS                                                           -->
+<!-- ====================================================================== -->
+
+<!-- CATEGORÍAS · acento: amarillo + manchas alternadas verde / rojo, muy chicas. -->
+<section class="seccion categorias fondo-foto escena-categorias" aria-labelledby="categorias-titulo">
+
+  <div class="container--wide">
+
+    <div class="categorias__head">
+      <div>
+        <p class="kicker reveal">Categorías</p>
+        <h2 class="titulo categorias__titulo reveal reveal--d1" id="categorias-titulo">
+          Elegí la base <span class="brush">ideal.</span>
+        </h2>
+      </div>
+      <p class="parrafo categorias__intro reveal reveal--d2">
+        Explorá nuestras categorías y encontrá la prenda que mejor se adapta a tu estilo,
+        a tu proyecto o a tu marca.
+      </p>
+    </div>
+
+    <div class="categorias__lista" id="categorias-lista">
+
+      <article class="categorias__item reveal">
+        <div class="cat-card">
+          <div class="cat-card__media">
+            <img src="assets/categoria-remeras.png" width="1145" height="1374" alt="Remera BLONK negra colgada en percha sobre pared de hormigon" loading="lazy">
+          </div>
+          <div class="cat-card__cuerpo">
+            <h3 class="cat-card__nombre">Remeras</h3>
+            <p class="cat-card__desc">Clásicas, oversize y premium. Distintos talles y colores.</p>
+            <a class="cat-card__cta cat-card__link" href="catalogo.html?cat=remeras">
+              Ver diseños
+              <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="categorias__item reveal reveal--d1">
+        <div class="cat-card">
+          <div class="cat-card__media">
+            <img src="assets/categoria-buzos.png" width="1145" height="1374" alt="Buzo BLONK negro con capucha colgado en el taller" loading="lazy">
+          </div>
+          <div class="cat-card__cuerpo">
+            <h3 class="cat-card__nombre">Buzos</h3>
+            <p class="cat-card__desc">Hoodies y canguros para todos los climas y estilos.</p>
+            <a class="cat-card__cta cat-card__link" href="catalogo.html?cat=buzos">
+              Ver diseños
+              <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="categorias__item reveal reveal--d2">
+        <div class="cat-card">
+          <div class="cat-card__media">
+            <img src="assets/categoria-conjuntos.png" width="1145" height="1374" alt="Conjunto BLONK de buzo y pantalon sobre mesa de taller" loading="lazy">
+          </div>
+          <div class="cat-card__cuerpo">
+            <h3 class="cat-card__nombre">Conjuntos</h3>
+            <p class="cat-card__desc">Coordinados que combinan estilo, comodidad y actitud.</p>
+            <a class="cat-card__cta cat-card__link" href="catalogo.html?cat=conjuntos">
+              Ver diseños
+              <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="categorias__item reveal reveal--d3">
+        <div class="cat-card">
+          <div class="cat-card__media">
+            <img src="assets/categoria-personalizados.png" width="1145" height="1374" alt="Transfer DTF de BLONK frente a la prensa de calor" loading="lazy">
+          </div>
+          <div class="cat-card__cuerpo">
+            <h3 class="cat-card__nombre">Personalizados</h3>
+            <p class="cat-card__desc">Llevá tu idea a la prenda. Diseños únicos, sin límites.</p>
+            <a class="cat-card__cta cat-card__link" href="#personalizados">
+              Crear el mío
+              <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <p class="hint-swipe" id="categorias-hint">Deslizá para ver más →</p>
+
+    <p class="categorias__asesoria reveal">
+      <svg class="corona" viewBox="0 0 40 26" fill="currentColor" aria-hidden="true"><path d="M1.8 24.2 5.4 4.8l7.7 9.3L20 1.6l6.9 12.5 7.7-9.3 3.6 19.4z"/></svg>
+      ¿No sabés qué elegir?
+      <a href="#" data-wsp="Hola BLONK! No sé bien qué prenda me conviene. ¿Me ayudan a elegir?">
+        Te asesoramos
+        <svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 4. CONFIGURADOR DE REMERAS · prenda a la IZQUIERDA en desktop           -->
+<!-- ====================================================================== -->
+
+<!-- CONFIGURADOR REMERAS · acento: amarillo + microacento verde. -->
+<section class="seccion config config--remeras fondo-foto escena-config-remeras seccion-verde"
+         id="config-remeras" aria-labelledby="config-remeras-titulo">
+
+  <div class="container--wide config__grid">
+
+    <!-- En mobile el orden es: encabezado -> preview -> controles, para poder
+         ver la prenda mientras se la personaliza. En desktop la grilla vuelve
+         a poner la prenda a la izquierda y el panel a la derecha. -->
+    <div class="config__intro">
+      <p class="kicker reveal">Configurador</p>
+
+      <h2 class="titulo config__titulo reveal reveal--d1" id="config-remeras-titulo">
+        Tu remera, tu color
+        <span class="linea-propia"><span class="brush">propio.</span></span>
+      </h2>
+
+      <div class="config__precio-fila reveal reveal--d1">
+        <p class="config__nombre" data-config-nombre>Remera clásica unisex</p>
+        <p class="precio" data-config-precio>$20.000</p>
+        <p class="config__bajada" data-config-bajada>Algodón premium · DTF de alta calidad</p>
+      </div>
+    </div>
+
+    <div class="config__media reveal">
+      <!-- js/prenda.js arma acá las tres capas: color enmascarado con la
+           silueta, foto blanca en multiply y, encima, el diseño del usuario. -->
+      <div class="config__prenda-wrap" data-config-media></div>
+    </div>
+
+    <div class="config__controles">
+      <div class="config__bloque reveal reveal--d2">
+        <span class="paso-label" id="lbl-color-remera">1. Elegí tu color</span>
+        <div class="swatches" data-config-colores data-grupo-radio role="radiogroup" aria-labelledby="lbl-color-remera"></div>
+      </div>
+
+      <!-- Subir un diseño propio. La imagen va en una capa aparte sobre la
+           prenda: cambiar el color no la toca. -->
+      <div class="config__bloque diseno reveal reveal--d2" data-diseno-bloque>
+        <span class="paso-label" id="lbl-diseno-remera">2. Subí tu diseño</span>
+
+        <div class="diseno__fila">
+          <label class="btn btn--solido diseno__subir" for="diseno-remera">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3h16v-3"/></svg>
+            Elegir imagen
+          </label>
+          <input class="visually-hidden" type="file" id="diseno-remera"
+                 accept="image/png,image/jpeg,image/webp"
+                 data-diseno-input aria-describedby="ayuda-diseno-remera">
+          <p class="diseno__nombre" data-diseno-nombre></p>
+          <button class="diseno__quitar" type="button" data-diseno-quitar>Quitar diseño</button>
+        </div>
+
+        <p class="diseno__ayuda" id="ayuda-diseno-remera">
+          PNG, JPG o WebP. Si tu PNG tiene fondo transparente lo respetamos tal cual.
+        </p>
+        <p class="diseno__aviso" data-diseno-aviso role="alert" hidden></p>
+
+        <div class="diseno__escala">
+          <div class="diseno__escala-head">
+            <label class="paso-label" for="escala-remera">Tamaño del diseño</label>
+            <span class="diseno__escala-valor" data-diseno-escala-valor>32%</span>
+          </div>
+          <div class="diseno__escala-fila">
+            <input type="range" id="escala-remera" data-diseno-escala
+                   min="12" max="52" step="1" value="32">
+            <button class="diseno__reset" type="button" data-diseno-reset>Restablecer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="config__fila reveal reveal--d2">
+        <div>
+          <span class="paso-label" id="lbl-talle-remera">3. Elegí tu talle</span>
+          <div class="talles" data-config-talles data-grupo-radio role="radiogroup" aria-labelledby="lbl-talle-remera"></div>
+        </div>
+
+        <div>
+          <span class="paso-label" id="lbl-cant-remera">4. Cantidad</span>
+          <div class="cantidad" data-cantidad data-min="1" data-max="99" aria-labelledby="lbl-cant-remera">
+            <button class="cantidad__btn" type="button" data-cantidad-menos aria-label="Quitar una unidad">&minus;</button>
+            <input class="cantidad__valor" type="number" value="1" min="1" max="99" aria-label="Cantidad de remeras">
+            <button class="cantidad__btn" type="button" data-cantidad-mas aria-label="Sumar una unidad">+</button>
+          </div>
+        </div>
+
+        <div>
+          <span class="paso-label">5. Acciones</span>
+          <div class="config__acciones">
+            <button class="btn btn--primario" type="button" data-config-personalizar>
+              Personalizar ahora
+              <svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </button>
+            <a class="btn btn--solido" href="catalogo.html?cat=remeras">
+              Ver diseños
+              <svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- La info de calidad vive acá adentro, no en una card aparte. -->
+      <div class="reveal reveal--d3">
+        <details class="detalles">
+          <summary class="detalles__resumen">Más detalles</summary>
+          <div class="detalles__cuerpo">
+            <ul class="detalles__lista">
+              <li>Algodón premium, calce unisex.</li>
+              <li>Estampado DTF de alta calidad: colores intensos, buena definición y terminación prolija.</li>
+              <li>Talles S, M, L, XL y XXL. También hacemos 6, 8 y 10 en calce oversize.</li>
+              <li>Lavar del revés con agua fría. No planchar sobre la estampa.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="config__pie reveal reveal--d3">
+        <button class="config__link-talles" type="button" data-abrir-talles="remeras">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v8H3z"/><path d="M7 8v3M11 8v3M15 8v3M19 8v3"/></svg>
+          Guía de talles
+        </button>
+        <span class="dato-chico">Envíos a todo el país</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 5. CONFIGURADOR DE BUZOS · prenda a la DERECHA en desktop               -->
+<!-- ====================================================================== -->
+
+<!-- CONFIGURADOR BUZOS · acento: amarillo + pequeño acento rojo.
+     La escena de fondo ya trae el BLONK pintado, así que el rojo entra
+     La escena de fondo ya trae el BLONK pintado en la pared. -->
+<section class="seccion config config--buzos fondo-foto escena-config-buzos seccion-rojo"
+         id="config-buzos" aria-labelledby="config-buzos-titulo">
+
+  <div class="container--wide config__grid">
+
+    <!-- Mismo orden mobile que remeras: encabezado -> preview -> controles. -->
+    <div class="config__intro">
+      <p class="kicker reveal">Configurador</p>
+
+      <h2 class="titulo config__titulo reveal reveal--d1" id="config-buzos-titulo">
+        Tu buzo, tu color
+        <span class="linea-propia"><span class="brush">propio.</span></span>
+      </h2>
+
+      <div class="config__precio-fila reveal reveal--d1">
+        <p class="config__nombre" data-config-nombre>Buzo clásico unisex</p>
+        <p class="precio" data-config-precio>$32.500</p>
+        <p class="config__bajada" data-config-bajada>Frisado premium · DTF de alta calidad</p>
+      </div>
+    </div>
+
+    <div class="config__media reveal">
+      <div class="config__prenda-wrap" data-config-media></div>
+    </div>
+
+    <div class="config__controles">
+      <div class="config__bloque reveal reveal--d2">
+        <span class="paso-label" id="lbl-color-buzo">1. Elegí tu color</span>
+        <div class="swatches" data-config-colores data-grupo-radio role="radiogroup" aria-labelledby="lbl-color-buzo"></div>
+      </div>
+
+      <!-- Subir un diseño propio (mismo sistema que en remeras). -->
+      <div class="config__bloque diseno reveal reveal--d2" data-diseno-bloque>
+        <span class="paso-label" id="lbl-diseno-buzo">2. Subí tu diseño</span>
+
+        <div class="diseno__fila">
+          <label class="btn btn--solido diseno__subir" for="diseno-buzo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3h16v-3"/></svg>
+            Elegir imagen
+          </label>
+          <input class="visually-hidden" type="file" id="diseno-buzo"
+                 accept="image/png,image/jpeg,image/webp"
+                 data-diseno-input aria-describedby="ayuda-diseno-buzo">
+          <p class="diseno__nombre" data-diseno-nombre></p>
+          <button class="diseno__quitar" type="button" data-diseno-quitar>Quitar diseño</button>
+        </div>
+
+        <p class="diseno__ayuda" id="ayuda-diseno-buzo">
+          PNG, JPG o WebP. Si tu PNG tiene fondo transparente lo respetamos tal cual.
+        </p>
+        <p class="diseno__aviso" data-diseno-aviso role="alert" hidden></p>
+
+        <div class="diseno__escala">
+          <div class="diseno__escala-head">
+            <label class="paso-label" for="escala-buzo">Tamaño del diseño</label>
+            <span class="diseno__escala-valor" data-diseno-escala-valor>28%</span>
+          </div>
+          <div class="diseno__escala-fila">
+            <input type="range" id="escala-buzo" data-diseno-escala
+                   min="10" max="46" step="1" value="28">
+            <button class="diseno__reset" type="button" data-diseno-reset>Restablecer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="config__fila reveal reveal--d2">
+        <div>
+          <span class="paso-label" id="lbl-talle-buzo">3. Elegí tu talle</span>
+          <div class="talles" data-config-talles data-grupo-radio role="radiogroup" aria-labelledby="lbl-talle-buzo"></div>
+        </div>
+
+        <div>
+          <span class="paso-label" id="lbl-cant-buzo">4. Cantidad</span>
+          <div class="cantidad" data-cantidad data-min="1" data-max="99" aria-labelledby="lbl-cant-buzo">
+            <button class="cantidad__btn" type="button" data-cantidad-menos aria-label="Quitar una unidad">&minus;</button>
+            <input class="cantidad__valor" type="number" value="1" min="1" max="99" aria-label="Cantidad de buzos">
+            <button class="cantidad__btn" type="button" data-cantidad-mas aria-label="Sumar una unidad">+</button>
+          </div>
+        </div>
+
+        <div>
+          <span class="paso-label">5. Acciones</span>
+          <div class="config__acciones">
+            <button class="btn btn--primario" type="button" data-config-personalizar>
+              Personalizar ahora
+              <svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </button>
+            <a class="btn btn--solido" href="catalogo.html?cat=buzos">
+              Ver diseños
+              <svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal--d3">
+        <details class="detalles">
+          <summary class="detalles__resumen">Más detalles</summary>
+          <div class="detalles__cuerpo">
+            <ul class="detalles__lista">
+              <li>Frisado premium, calce unisex.</li>
+              <li>Estampado DTF de alta calidad: colores intensos, buena definición y terminación prolija.</li>
+              <li>Nueve colores disponibles: gris, rojo, bordó, natural, violeta, azul, negro, verde y azul claro.</li>
+              <li>Lavar del revés con agua fría. No planchar sobre la estampa.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="config__pie reveal reveal--d3">
+        <button class="config__link-talles" type="button" data-abrir-talles="buzos">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v8H3z"/><path d="M7 8v3M11 8v3M15 8v3M19 8v3"/></svg>
+          Guía de talles
+        </button>
+        <span class="dato-chico">Envíos a todo el país</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 6. BUSCADOR / ENTRADA AL CATÁLOGO                                       -->
+<!-- ====================================================================== -->
+<section class="seccion buscador-sec fondo-foto escena-buscador" aria-labelledby="buscador-titulo">
+  <div class="container--wide buscador-sec__inner">
+   <div class="buscador-sec__centro">
+
+    <svg class="buscador-sec__corona reveal" viewBox="0 0 40 26" fill="currentColor" aria-hidden="true">
+      <path d="M1.8 24.2 5.4 4.8l7.7 9.3L20 1.6l6.9 12.5 7.7-9.3 3.6 19.4z"/>
+    </svg>
+
+    <h2 class="titulo buscador-sec__titulo reveal reveal--d1" id="buscador-titulo">
+      Buscá tu próximo <span class="brush">diseño.</span>
+    </h2>
+
+    <p class="buscador-sec__sub reveal reveal--d1">
+      Explorá remeras, buzos, conjuntos y personalizados.
+      Escribí lo que tenés en mente y encontralo al toque.
+    </p>
+
+    <form class="buscador-sec__form reveal reveal--d2" data-busqueda role="search" action="catalogo.html" method="get">
+      <div class="buscador-sec__campo">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <label class="visually-hidden" for="q-home">¿Qué estás buscando?</label>
+        <input id="q-home" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off">
+        <button class="buscador-sec__submit" type="submit">Buscar</button>
+      </div>
+    </form>
+
+    <p class="buscador-sec__label reveal reveal--d2">Explorá por categorías y filtros:</p>
+
+    <div class="buscador-sec__chips reveal reveal--d2">
+      <button class="chip" type="button" data-chip-busqueda="remeras">Remeras</button>
+      <button class="chip" type="button" data-chip-busqueda="buzos">Buzos</button>
+      <button class="chip" type="button" data-chip-busqueda="conjuntos">Conjuntos</button>
+      <button class="chip" type="button" data-chip-busqueda="personalizados">Personalizados</button>
+      <button class="chip" type="button" data-chip-busqueda="argentina">Argentina</button>
+      <button class="chip" type="button" data-chip-busqueda="oversize">Oversize</button>
+      <button class="chip" type="button" data-chip-busqueda="negro"><span class="chip__punto" style="background:#141414"></span>Negro</button>
+      <button class="chip" type="button" data-chip-busqueda="bordó"><span class="chip__punto" style="background:#6E1B2A"></span>Bordó</button>
+      <button class="chip" type="button" data-chip-busqueda="unisex">Unisex</button>
+    </div>
+
+    <div class="buscador-sec__pie reveal reveal--d3">
+      <a class="btn btn--primario btn--grande" href="catalogo.html">
+        Explorar catálogo completo
+        <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="buscador-sec__nota">Descubrí todos los productos BLONK</p>
+    </div>
+
+   </div><!-- /.buscador-sec__centro -->
+
+    <div class="ventajas reveal">
+      <p class="ventaja">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>
+        <span><strong>Alta calidad</strong><span>en cada prenda</span></span>
+      </p>
+      <p class="ventaja">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4.5-1L20 7.5 16.5 4 5 15.5z"/><path d="M15 5.5L18.5 9"/></svg>
+        <span><strong>Diseños únicos</strong><span>y originales</span></span>
+      </p>
+      <p class="ventaja ventaja--verde">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        <span><strong>Envíos</strong><span>a todo el país</span></span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 7. PERSONALIZADOS                                                       -->
+<!-- ====================================================================== -->
+
+<!-- PERSONALIZADOS · acento: rojo. Es donde más entra, porque conecta con la
+     gráfica original de la marca. El aerosol entra cortado desde la esquina. -->
+<section class="seccion personalizados fondo-carbon seccion-rojo" id="personalizados" aria-labelledby="personalizados-titulo">
+
+  <div class="container">
+
+    <div class="personalizados__head">
+      <div>
+        <p class="kicker reveal">Personalizados</p>
+        <h2 class="titulo personalizados__titulo reveal reveal--d1" id="personalizados-titulo">
+          Vos traés la idea. <span class="brush">BLONK la imprime.</span>
+        </h2>
+      </div>
+      <p class="parrafo reveal reveal--d2">
+        Una frase, un logo, un dibujo o una foto. Lo preparamos para imprimir
+        y lo pasamos a la prenda que elijas.
+      </p>
+    </div>
+
+    <div class="personalizados__grid">
+
+      <div class="personalizados__media reveal">
+        <img class="personalizados__foto" src="assets/personalizados-proceso.png"
+             alt="Mesa de taller BLONK con transfers DTF, prendas y herramientas"
+             loading="lazy" decoding="async">
+
+        <div class="personalizados__para reveal reveal--d2">
+          <h3>Trabajamos con</h3>
+          <div class="personalizados__tags">
+            <span class="tag-estatico">Personas</span>
+            <span class="tag-estatico">Colegios</span>
+            <span class="tag-estatico">Locales de ropa</span>
+            <span class="tag-estatico">Emprendimientos</span>
+            <span class="tag-estatico">Instituciones</span>
+            <span class="tag-estatico">Fábricas</span>
+            <span class="tag-estatico">Producciones especiales</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <ol class="pasos reveal reveal--d1">
+          <li class="paso">
+            <span class="paso__num" aria-hidden="true">1</span>
+            <h3>Mandanos tu idea</h3>
+            <p>Escribinos por WhatsApp con la frase, el logo o el archivo que tengas. Si está a mano alzada también sirve.</p>
+          </li>
+          <li class="paso">
+            <span class="paso__num" aria-hidden="true">2</span>
+            <h3>Elegí la prenda</h3>
+            <p>Remera, buzo o conjunto. Definimos color, talle y cantidad.</p>
+          </li>
+          <li class="paso">
+            <span class="paso__num" aria-hidden="true">3</span>
+            <h3>Preparamos el estampado</h3>
+            <p>Dejamos el diseño listo para imprimir en el tamaño y la posición que buscás.</p>
+          </li>
+          <li class="paso">
+            <span class="paso__num" aria-hidden="true">4</span>
+            <h3>Lo imprimimos</h3>
+            <p>Estampamos en DTF y prensamos la prenda en el taller.</p>
+          </li>
+          <li class="paso">
+            <span class="paso__num" aria-hidden="true">5</span>
+            <h3>Lo recibís</h3>
+            <p>Coordinamos la entrega o el envío a tu localidad.</p>
+          </li>
+        </ol>
+
+        <div class="personalizados__cta reveal reveal--d2">
+          <button class="btn btn--primario btn--grande" type="button"
+                  data-wsp="Hola BLONK! Quiero un estampado personalizado. Les paso mi idea.">
+            Mandanos tu idea
+            <svg class="flecha" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+          </button>
+          <a class="btn btn--grande" href="catalogo.html?cat=personalizados">Ver personalizados</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 8. CÓMO PEDIR · ENVÍOS · FAQ                                            -->
+<!-- Tres bloques consecutivos, con una narrativa clara:                     -->
+<!--   cómo compro  ->  cómo me llega  ->  resuelvo mis dudas                -->
+<!-- ====================================================================== -->
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- BLOQUE 1 · CÓMO PEDIR — línea de producción de cuatro pasos             -->
+<!-- ---------------------------------------------------------------------- -->
+<section class="seccion proceso textura-hormigon" id="como-pedir" aria-labelledby="proceso-titulo">
+  <div class="container--wide">
+
+    <div class="proceso__head">
+      <p class="kicker reveal">Cómo pedir</p>
+      <h2 class="titulo proceso__titulo reveal reveal--d1" id="proceso-titulo">
+        Pedir en BLONK
+        <span class="linea-propia">es así de <span class="brush">simple.</span></span>
+      </h2>
+    </div>
+
+    <ol class="linea-produccion" data-proceso>
+
+      <li class="paso-prod">
+        <span class="paso-prod__linea" aria-hidden="true"></span>
+        <span class="paso-prod__num" aria-hidden="true">01</span>
+        <h3 class="paso-prod__titulo">Elegí</h3>
+        <span class="paso-prod__dot" aria-hidden="true"></span>
+        <p class="paso-prod__texto">Buscá tu diseño en el catálogo o configurá tu prenda.</p>
+      </li>
+
+      <li class="paso-prod paso-prod--verde">
+        <span class="paso-prod__linea" aria-hidden="true"></span>
+        <span class="paso-prod__num" aria-hidden="true">02</span>
+        <h3 class="paso-prod__titulo">Configurá</h3>
+        <span class="paso-prod__dot" aria-hidden="true"></span>
+        <p class="paso-prod__texto">Elegí color, talle, cantidad y, si querés, subí tu propio diseño.</p>
+      </li>
+
+      <li class="paso-prod">
+        <span class="paso-prod__linea" aria-hidden="true"></span>
+        <span class="paso-prod__num" aria-hidden="true">03</span>
+        <h3 class="paso-prod__titulo">Mandalo</h3>
+        <span class="paso-prod__dot" aria-hidden="true"></span>
+        <p class="paso-prod__texto">Desde el carrito enviás tu pedido por WhatsApp.</p>
+      </li>
+
+      <li class="paso-prod paso-prod--rojo">
+        <span class="paso-prod__linea" aria-hidden="true"></span>
+        <span class="paso-prod__num" aria-hidden="true">04</span>
+        <h3 class="paso-prod__titulo">Recibilo</h3>
+        <span class="paso-prod__dot" aria-hidden="true"></span>
+        <p class="paso-prod__texto">Confirmamos el pedido, lo producimos y coordinamos la entrega o el envío.</p>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- BLOQUE 2 · ENVÍOS                                                       -->
+<!-- ---------------------------------------------------------------------- -->
+<section class="seccion envios fondo-negro seccion-verde" id="envios" aria-labelledby="envios-titulo">
+  <div class="container--wide envios__grid">
+
+    <div class="envios__copy">
+      <p class="kicker reveal">Envíos</p>
+      <h2 class="titulo envios__titulo reveal reveal--d1" id="envios-titulo">
+        De BLONK a todo el
+        <span class="brush">país.</span>
+      </h2>
+      <p class="parrafo reveal reveal--d1">
+        El costo del envío depende del destino, peso y modalidad.
+        Lo confirmamos al cerrar tu pedido.
+      </p>
+    </div>
+
+    <!-- Etiqueta de envío: los datos se muestran como un remito del taller,
+         no como campos de formulario. El usuario no completa nada acá. -->
+    <div class="remito reveal reveal--d2">
+      <div class="remito__top">
+        <span class="remito__marca">BLONK</span>
+        <span class="remito__tipo">Datos de envío</span>
+      </div>
+
+      <p class="remito__intro">Para preparar tu envío te vamos a pedir:</p>
+
+      <ul class="remito__datos">
+        <li>Nombre completo</li>
+        <li>DNI</li>
+        <li>Email</li>
+        <li>Código postal</li>
+        <li>Localidad</li>
+        <li>Teléfono</li>
+      </ul>
+
+      <div class="remito__pie">
+        <span class="remito__codigo" aria-hidden="true">ENVÍOS · ARG</span>
+        <span class="remito__nota">Te los pedimos recién al cerrar el pedido.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- BLOQUE 3 · PREGUNTAS FRECUENTES                                         -->
+<!-- ---------------------------------------------------------------------- -->
+<section class="seccion faq textura-hormigon" id="faq" aria-labelledby="faq-titulo">
+  <div class="container--wide faq__grid">
+
+    <div class="faq__intro">
+      <p class="kicker reveal">Preguntas frecuentes</p>
+      <h2 class="titulo faq__titulo reveal reveal--d1" id="faq-titulo">
+        Antes de preguntar, capaz está
+        <span class="brush">acá.</span>
+      </h2>
+      <p class="parrafo reveal reveal--d1">
+        ¿No encontraste lo que buscabas? Escribinos y te ayudamos.
+      </p>
+      <div class="reveal reveal--d2">
+        <button class="btn btn--primario btn--grande" type="button"
+                data-wsp="Hola BLONK! Tengo una consulta que no encontré en las preguntas frecuentes.">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4a8.4 8.4 0 1 1 15.4-4.4z"/></svg>
+          Hablar por WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <div class="faq__lista reveal reveal--d1">
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Cómo pido un diseño personalizado?</summary>
+        <div class="detalles__cuerpo">
+          <p>Escribinos por WhatsApp con tu idea. Nos podés mandar un archivo, una foto o simplemente
+          contarnos qué querés. Definimos prenda, color, talle y cantidad, y te confirmamos el valor.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Qué archivo tengo que enviar?</summary>
+        <div class="detalles__cuerpo">
+          <p>Cuanta más resolución, mejor. PNG con fondo transparente, PDF o vectorial es lo ideal.
+          Si solo tenés una foto o una captura, mandala igual y vemos cómo prepararla.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Qué talles hay y cómo sé el mío?</summary>
+        <div class="detalles__cuerpo">
+          <p>Remeras y buzos en S, M, L, XL y XXL, más 6, 8 y 10 en calce oversize.
+          Podés ver las medidas exactas en la
+          <button class="config__link-talles" type="button" data-abrir-talles="remeras" style="display:inline">guía de talles</button>.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Qué colores están disponibles?</summary>
+        <div class="detalles__cuerpo">
+          <p>En buzos: gris, rojo, bordó, natural, violeta, azul, negro, verde y azul claro.
+          En remeras podés ver toda la paleta en el configurador de esta misma página.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Cómo cuido el estampado?</summary>
+        <div class="detalles__cuerpo">
+          <p>Lavá la prenda del revés con agua fría y no planches directamente sobre la estampa.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Trabajan por cantidad?</summary>
+        <div class="detalles__cuerpo">
+          <p>Sí. Hacemos producciones para colegios, emprendimientos, locales, instituciones y equipos
+          de trabajo. Escribinos con la cantidad y el diseño y te cotizamos.</p>
+        </div>
+      </details>
+
+      <details class="detalles detalles--faq">
+        <summary class="detalles__resumen">¿Cómo realizan los envíos?</summary>
+        <div class="detalles__cuerpo">
+          <p>Hacemos envíos a todo el país. El costo depende del destino, el peso y la modalidad,
+          así que lo confirmamos al cerrar el pedido. Para coordinarlo te vamos a pedir nombre
+          completo, DNI, email, código postal, localidad y teléfono.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 9. CTA FINAL                                                            -->
+<!-- ====================================================================== -->
+<section class="seccion cta-final" aria-labelledby="cta-titulo">
+
+  <!-- Fondo real, a sangre. El contenido va por encima con su propio velo.
+       Todavía no hay recorte vertical dedicado, así que en mobile se usa la
+       misma foto con el encuadre corrido hacia el centro (ver CSS). -->
+  <div class="cta-final__fondo">
+    <img src="assets/cta-final-blonk.png" alt="" loading="lazy" decoding="async">
+  </div>
+
+  <!-- Velo de contraste: deja ver el hormigón y la luz, pero el texto manda. -->
+  <div class="cta-final__velo" aria-hidden="true"></div>
+
+  <div class="container cta-final__inner">
+    <p class="cta-final__eyebrow reveal">¿Tenés algo en mente?</p>
+
+    <h2 class="cta-final__titulo reveal reveal--d1" id="cta-titulo">
+      <span class="linea-propia">Tenés la idea.</span>
+      <span class="linea-propia">Nosotros la <span class="brush">imprimimos.</span></span>
+    </h2>
+
+    <p class="cta-final__sub reveal reveal--d1">
+      Contanos qué querés estampar y lo resolvemos juntos.
+    </p>
+
+    <div class="cta-final__ctas reveal reveal--d2">
+      <button class="btn btn--primario btn--grande" type="button"
+              data-wsp="Hola BLONK! Vi la web y quiero hacer un pedido.">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4a8.4 8.4 0 1 1 15.4-4.4z"/></svg>
+        Hablemos por WhatsApp
+      </button>
+      <a class="btn btn--grande btn--contorno" href="catalogo.html">Ver catálogo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================================================================== -->
+<!-- FOOTER                                                                  -->
+<!-- ====================================================================== -->
+<footer class="footer">
+  <div class="container--wide">
+    <div class="footer__grid">
+
+      <div>
+        <a class="logo" href="index.html" aria-label="BLONK, inicio">
+          <img src="assets/logo.png" width="1145" height="1374" alt="BLONK" loading="lazy">
+        </a>
+        <p class="footer__lema">La facha no se compra, se imprime.</p>
+        <p class="footer__desc">Estampados personalizados e indumentaria unisex. DTF de alta calidad, envíos a todo el país.</p>
+      </div>
+
+      <div>
+        <h3>Comprar</h3>
+        <ul class="footer__links">
+          <li><a href="catalogo.html">Catálogo completo</a></li>
+          <li><a href="catalogo.html?cat=remeras">Remeras</a></li>
+          <li><a href="catalogo.html?cat=buzos">Buzos</a></li>
+          <li><a href="catalogo.html?cat=conjuntos">Conjuntos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>BLONK</h3>
+        <ul class="footer__links">
+          <li><a href="#personalizados">Personalizados</a></li>
+          <li><a href="#como-pedir">Cómo pedir</a></li>
+          <li><a href="#envios">Envíos</a></li>
+          <li><button class="footer__links-btn" type="button" data-abrir-talles="remeras" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;font-size:.9rem">Guía de talles</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contacto</h3>
+        <ul class="footer__contacto">
+          <li>
+            <a href="#" data-wsp="Hola BLONK! Vengo de la web.">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4a8.4 8.4 0 1 1 15.4-4.4z"/></svg>
+              WhatsApp <span class="footer__pendiente">número pendiente</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/blonk_oficial_?igsi=OWl3OHhhdnZ4Y2xr" target="_blank" rel="noopener noreferrer" data-instagram>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".9" fill="currentColor" stroke="none"/></svg>
+              Instagram <span class="footer__handle" data-instagram-handle>@blonk_oficial_</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bajo">
+      <p>&copy; <span id="anio">2026</span> BLONK. Todos los derechos reservados.</p>
+      <p>Indumentaria unisex &middot; Estampados DTF &middot; Argentina</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================================== -->
+<!-- CARRITO (drawer derecha → izquierda)                                    -->
+<!-- ====================================================================== -->
+<aside class="carrito" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo">
+  <div class="carrito__top">
+    <h2 class="carrito__titulo" id="carrito-titulo">Tu carrito <span id="carrito-cuenta"></span></h2>
+    <button class="icon-btn" type="button" data-carrito-cerrar aria-label="Cerrar carrito">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="carrito__cuerpo" id="carrito-cuerpo" aria-live="polite"></div>
+
+  <div class="carrito__pie" id="carrito-pie" hidden>
+    <dl class="carrito__subtotal">
+      <dt>Subtotal</dt>
+      <dd id="carrito-subtotal">$0</dd>
+    </dl>
+    <p class="carrito__nota" id="carrito-nota"></p>
+    <div class="carrito__acciones">
+      <button class="btn btn--primario btn--grande" type="button" data-carrito-wsp>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4a8.4 8.4 0 1 1 15.4-4.4z"/></svg>
+        Finalizar por WhatsApp
+      </button>
+      <button class="btn" type="button" data-carrito-cerrar>Seguir comprando</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ====================================================================== -->
+<!-- MODAL GUÍA DE TALLES                                                    -->
+<!-- ====================================================================== -->
+<div class="modal talles-modal" id="modal-talles" role="dialog" aria-modal="true" aria-labelledby="talles-titulo">
+  <div class="modal__caja">
+    <button class="modal__cerrar" type="button" data-cerrar-modal aria-label="Cerrar guía de talles">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <div class="talles-modal__inner">
+      <div>
+        <h2 class="talles-modal__titulo" id="talles-titulo">Guía de talles</h2>
+        <p class="talles-modal__sub">Medidas de la prenda, no del cuerpo.</p>
+
+        <div class="talles-modal__tabs" role="group" aria-label="Tipo de prenda">
+          <button class="chip" type="button" data-talles-tab="remeras" aria-pressed="true">Remeras</button>
+          <button class="chip" type="button" data-talles-tab="buzos" aria-pressed="false">Buzos</button>
+        </div>
+
+        <div id="talles-contenido"></div>
+      </div>
+
+      <div>
+        <!-- REEMPLAZAR POR:
+             <img src="assets/guia-medidas-remera.webp" width="1000" height="1200"
+                  alt="Remera con las medidas de alto y ancho señaladas" loading="lazy"> -->
+        <figure class="ph" style="--ratio: 5 / 6" role="img" aria-label="Imagen pendiente: guia-medidas-remera.webp.">
+          <figcaption class="ph__meta">
+            <span class="ph__name">guia-medidas-remera.webp</span>
+            <span class="ph__res">1000 × 1200 px · 5:6</span>
+            <span class="ph__desc">Remera negra colgada de frente con flechas señalando ALTO (hombro a base) y ANCHO (axila a axila).</span>
+          </figcaption>
+        </figure>
+
+        <div class="talles-modal__medir">
+          <h3>¿Cómo medir?</h3>
+          <ol>
+            <li><strong>Alto:</strong> desde el hombro hasta la base de la prenda.</li>
+            <li><strong>Ancho:</strong> de axila a axila, con la prenda apoyada y plana.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Año del footer. Único script inline del proyecto, a propósito.
+  document.getElementById('anio').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

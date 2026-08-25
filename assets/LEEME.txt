@@ -1,0 +1,68 @@
+Carpeta de imagenes de BLONK.
+
+YA INTEGRADO
+------------
+logo.png                        -> header y footer
+fondo-hero.png                  -> hero, fondo a sangre
+proceso-dtf.png                 -> "Que hace BLONK", foto izquierda
+proceso-dtf-fondo.png           -> "Que hace BLONK", textura del copy
+categoria-*.png (4)             -> cards de la seccion Categorias
+fondo-configurador-remeras.jpg  -> escena del configurador de remeras
+fondo-configurador-buzos.jpg    -> escena del configurador de buzos
+fondo-categorias.jpg            -> escena de la seccion Categorias
+fondo-buscador.jpg              -> escena de "Busca tu proximo diseno"
+
+remera_blanca.png              -> base del configurador de remeras
+buzo_blanco.png                  -> base del configurador de buzos
+
+productos/                      -> 16 fotos que alimentan el catalogo
+
+PRENDAS BASE: NO HACE FALTA UNA FOTO POR COLOR
+----------------------------------------------
+remera_blanca.png y buzo_blanco.png son las unicas fotos de prenda que se
+necesitan. El color va en una capa debajo, recortada con el alfa del propio PNG,
+y la foto se multiplica encima: asi se conservan sombras, pliegues y costuras.
+Por eso las dos tienen que tener fondo transparente real.
+
+Si se cambia una de estas fotos, actualizar la ruta en data/productos.js Y en
+css/styles.css (.garment-color--remera / .garment-color--buzo).
+
+IMPORTANTE: ABRIR LA WEB CON abrir-web.bat, NO CON DOBLE CLIC EN index.html
+---------------------------------------------------------------------------
+La mascara CSS que recorta el color se pide CON CORS. Con file:// (doble clic
+en index.html) cada archivo tiene origen opaco, la peticion falla, el navegador
+toma la mascara como vacia y BORRA la capa de color: la prenda queda blanca y
+los swatches parecen no hacer nada.
+
+Doble clic en abrir-web.bat: levanta un servidor local y abre el navegador.
+No necesita Node ni Python. Es ademas como va a funcionar en el hosting real.
+
+CATALOGO: EL NOMBRE DEL ARCHIVO ES EL PRODUCTO
+----------------------------------------------
+    prenda_etiqueta_color.ext
+
+    remera_malvinas-argentinas_negra.jpg
+      -> Remera · Malvinas Argentinas · Negra · $20.000
+
+Para sumar un producto: deja la foto en productos/ con ese formato y agrega el
+nombre del archivo al array ARCHIVOS_PRODUCTOS de data/productos.js.
+
+PENDIENTE
+---------
+guia-medidas-remera, guia-medidas-buzo, favicon y las
+imagenes de Open Graph. Aparecen en la web como bloques punteados con el nombre
+y la resolucion que necesitan. Lista completa en ASSETS-NECESARIOS.md.
+
+PESO
+----
+Los categoria-*.png, fondo-hero.png, proceso-dtf*.png y logo.png estan sin
+comprimir: ~15 MB en total. Pasarlos a webp es la mejora de performance mas
+importante que queda. Las rutas estan centralizadas para que sea una linea por
+imagen (ver ASSETS-NECESARIOS.md, punto 3).
+
+images.jfif no se usa en ningun lado.
+
+fonts/
+------
+Deja aca blonk-brush.woff2 si se consigue la tipografia brush real de la marca.
+Mientras no exista, la web usa Sedgwick Ave de Google.

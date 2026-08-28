@@ -1,0 +1,281 @@
+/* ============================================================================
+   BLONK · css/admin.css
+   Estilos propios del panel de administración. Se apoya en css/styles.css:
+   reutiliza tokens (--amarillo, --carbon, --hueso…) y clases (.btn, .campo,
+   .select, .badge, .modal, .toast) para mantener la identidad visual del sitio.
+   Acá va SOLO lo específico del panel.
+   ========================================================================== */
+
+/* ------------------------------------------------------------- LAYOUT BASE */
+.admin-main {
+  max-width: var(--ancho-wide);
+  margin: 0 auto;
+  padding: calc(var(--header-h) + 28px) var(--pad-lat) 80px;
+  min-height: 100vh;
+}
+
+.admin-cabecera { margin-bottom: 26px; }
+.admin-cabecera .titulo { margin: 6px 0 4px; }
+.admin-cabecera__sub { color: var(--tx-2); font-size: .96rem; }
+
+/* Barra superior del header del admin (más simple que la del sitio) */
+.admin-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  height: var(--header-h);
+  display: flex; align-items: center;
+  gap: 16px;
+  padding: 0 var(--pad-lat);
+  background: rgba(10,10,10,.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linea);
+}
+.admin-header .logo img { height: 34px; width: auto; display: block; }
+.admin-header__spacer { flex: 1; }
+.admin-header__user { color: var(--tx-2); font-size: .85rem; }
+@media (max-width: 640px) { .admin-header__user { display: none; } }
+
+/* ------------------------------------------------------------------ LOGIN */
+.login-pantalla {
+  min-height: 100vh;
+  display: grid; place-items: center;
+  padding: 40px 20px;
+}
+/* El display:grid de arriba le gana al atributo [hidden] (que oculta con
+   display:none). Estas reglas hacen que `hidden` mande: sin esto, el cuadro de
+   login seguía visible después de iniciar sesión. */
+.login-pantalla[hidden],
+#panel[hidden] { display: none !important; }
+.login-caja {
+  width: 100%; max-width: 400px;
+  background: var(--carbon);
+  border: 1px solid var(--linea-2);
+  border-radius: var(--radio-2);
+  padding: 34px 28px 30px;
+}
+.login-caja .logo { display: inline-block; margin-bottom: 18px; }
+.login-caja .logo img { height: 46px; width: auto; }
+.login-caja h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.login-caja p { color: var(--tx-2); font-size: .9rem; margin: 0 0 22px; }
+.login-campo { margin-bottom: 14px; }
+.login-campo label {
+  display: block; font-size: .74rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--tx-2); margin-bottom: 7px;
+}
+.login-error {
+  display: none;
+  margin: 4px 0 16px;
+  padding: 11px 14px;
+  font-size: .86rem;
+  color: var(--rojo-alto);
+  background: rgba(182,58,49,.10);
+  border: 1px solid rgba(182,58,49,.4);
+  border-radius: var(--radio);
+}
+.login-error.is-visible { display: block; }
+
+/* --------------------------------------------------------------- TOOLBAR */
+.admin-toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  margin-bottom: 22px;
+}
+.admin-toolbar__buscar { position: relative; flex: 1 1 240px; }
+.admin-toolbar__buscar .campo { padding-left: 42px; min-height: 46px; }
+.admin-toolbar__buscar svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--tx-3); pointer-events: none;
+}
+.admin-toolbar .select { flex: 0 0 auto; }
+.admin-toolbar__spacer { flex: 1; }
+
+/* ------------------------------------------------------------ CONTADOR */
+.admin-contador { color: var(--tx-2); font-size: .86rem; margin-bottom: 16px; }
+.admin-contador b { color: var(--hueso); }
+
+/* --------------------------------------------------------------- GRILLA */
+.admin-grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.admin-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--sup);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-2);
+  overflow: hidden;
+  transition: border-color var(--t-rapido) var(--ease), transform var(--t-rapido) var(--ease);
+}
+.admin-card:hover { border-color: rgba(231,169,27,.45); transform: translateY(-3px); }
+.admin-card.es-oculto { opacity: .62; }
+.admin-card.es-oculto:hover { opacity: 1; }
+
+.admin-card__media {
+  position: relative;
+  aspect-ratio: 7 / 8;
+  background: var(--hormigon-2);
+  overflow: hidden;
+}
+.admin-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-card__media .admin-card__sinfoto {
+  position: absolute; inset: 0;
+  display: grid; place-items: center; text-align: center;
+  color: var(--tx-3); font-size: .78rem; padding: 12px;
+}
+
+.admin-card__estado {
+  position: absolute; top: 8px; left: 8px;
+  padding: 3px 8px; border-radius: 3px;
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+.admin-card__estado.es-visible { color: var(--verde-alto); background: rgba(84,123,50,.16); border: 1px solid rgba(84,123,50,.5); }
+.admin-card__estado.es-oculto  { color: var(--tx-2);      background: rgba(10,10,10,.6);  border: 1px solid var(--linea-2); }
+.admin-card__destacado {
+  position: absolute; top: 8px; right: 8px;
+  width: 26px; height: 26px; display: grid; place-items: center;
+  border-radius: 50%; color: var(--amarillo);
+  background: rgba(231,169,27,.12); border: 1px solid rgba(231,169,27,.5);
+}
+
+.admin-card__cuerpo { padding: 12px 13px 13px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.admin-card__cat { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tx-3); }
+.admin-card__nombre { font-size: .98rem; font-weight: 600; line-height: 1.25; margin: 0; }
+.admin-card__precio { color: var(--amarillo); font-weight: 700; font-size: .95rem; margin-top: 2px; }
+.admin-card__precio.es-consultar { color: var(--tx-2); font-weight: 600; }
+
+.admin-card__acciones {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  padding: 0 13px 13px;
+}
+.admin-card__acciones .btn { min-height: 38px; padding: 8px 10px; font-size: .82rem; }
+.admin-card__acciones .btn--full { grid-column: 1 / -1; }
+
+.admin-mini {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 38px; padding: 8px 10px;
+  border: 1px solid var(--linea-2); border-radius: var(--radio);
+  background: var(--sup-alta); color: var(--hueso);
+  font-size: .82rem; font-weight: 600; cursor: pointer;
+  transition: border-color var(--t-rapido) var(--ease), background-color var(--t-rapido) var(--ease), color var(--t-rapido) var(--ease);
+}
+.admin-mini:hover { border-color: rgba(242,240,235,.42); }
+.admin-mini--peligro:hover { border-color: var(--rojo); color: var(--rojo-alto); background: rgba(182,58,49,.10); }
+
+/* ------------------------------------------------------ ESTADOS VACÍOS */
+.admin-estado {
+  text-align: center; padding: 70px 20px; color: var(--tx-2);
+}
+.admin-estado h2 { color: var(--hueso); font-size: 1.3rem; margin: 0 0 8px; }
+.admin-cargando { display: grid; place-items: center; gap: 14px; padding: 80px 20px; color: var(--tx-2); }
+.admin-spinner {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 3px solid var(--linea-2); border-top-color: var(--amarillo);
+  animation: admin-giro .8s linear infinite;
+}
+@keyframes admin-giro { to { transform: rotate(360deg); } }
+
+/* ----------------------------------------------------------- FORMULARIO */
+.admin-form { padding: 26px clamp(20px, 4vw, 40px) 34px; }
+.admin-form__titulo { font-size: 1.5rem; margin: 0 0 22px; padding-right: 40px; }
+
+.form-grid { display: grid; gap: 18px; }
+@media (min-width: 720px) {
+  .form-grid { grid-template-columns: 260px 1fr; align-items: start; }
+  .form-grid__foto { grid-column: 1; }
+  .form-grid__campos { grid-column: 2; }
+}
+
+.campo-bloque { margin-bottom: 16px; }
+.campo-bloque > label,
+.campo-label {
+  display: block; font-size: .74rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--tx-2); margin-bottom: 8px;
+}
+.campo-bloque textarea.campo { min-height: 96px; resize: vertical; font: inherit; }
+.campo-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.campo-ayuda { font-size: .78rem; color: var(--tx-3); margin-top: 6px; }
+
+/* Subida / preview de foto */
+.foto-drop {
+  position: relative; aspect-ratio: 7 / 8;
+  border: 1.5px dashed var(--linea-2); border-radius: var(--radio-2);
+  background: var(--hormigon-2);
+  display: grid; place-items: center; text-align: center;
+  color: var(--tx-3); cursor: pointer; overflow: hidden;
+  transition: border-color var(--t-rapido) var(--ease), background-color var(--t-rapido) var(--ease);
+}
+.foto-drop:hover { border-color: var(--amarillo); color: var(--tx-2); }
+.foto-drop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.foto-drop__hint { padding: 20px; font-size: .84rem; position: relative; z-index: 1; }
+.foto-drop.tiene-foto .foto-drop__hint {
+  position: absolute; inset: auto 0 0 0; z-index: 2;
+  background: linear-gradient(transparent, rgba(10,10,10,.86));
+  color: var(--hueso); padding: 24px 12px 12px;
+}
+.foto-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+/* Toggle switch (visible / destacado) */
+.toggle { display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle__pista {
+  width: 46px; height: 26px; border-radius: 999px; flex: 0 0 auto;
+  background: var(--sup-alta); border: 1px solid var(--linea-2);
+  position: relative; transition: background-color var(--t-rapido) var(--ease), border-color var(--t-rapido) var(--ease);
+}
+.toggle__pista::after {
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--hueso);
+  transition: transform var(--t-rapido) var(--ease);
+}
+.toggle input:checked + .toggle__pista { background: var(--amarillo); border-color: var(--amarillo); }
+.toggle input:checked + .toggle__pista::after { transform: translateX(20px); background: var(--tx-neg); }
+.toggle input:focus-visible + .toggle__pista { outline: 2px solid var(--amarillo); outline-offset: 2px; }
+.toggle__texto { font-size: .92rem; }
+.toggle__texto small { display: block; color: var(--tx-3); font-size: .76rem; font-weight: 400; }
+.toggle-fila { display: flex; flex-wrap: wrap; gap: 22px; margin: 4px 0 6px; }
+
+/* Chips seleccionables (talles / tags) */
+.chips-set { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-check {
+  padding: 8px 13px; border-radius: 999px;
+  border: 1px solid var(--linea-2); background: var(--sup-alta);
+  color: var(--tx-2); font-size: .84rem; font-weight: 600; cursor: pointer;
+  transition: all var(--t-rapido) var(--ease);
+}
+.chip-check.es-activo { background: var(--amarillo); border-color: var(--amarillo); color: var(--tx-neg); }
+
+/* Muestra de color en el select de color */
+.color-muestra {
+  display: inline-block; width: 16px; height: 16px; border-radius: 50%;
+  border: 1px solid var(--linea-2); vertical-align: -3px; margin-right: 8px;
+}
+
+/* Avanzado colapsable */
+.form-avanzado { border-top: 1px solid var(--linea); margin-top: 20px; padding-top: 6px; }
+.form-avanzado > summary {
+  cursor: pointer; list-style: none; padding: 12px 0;
+  font-weight: 600; color: var(--amarillo); font-size: .92rem;
+}
+.form-avanzado > summary::-webkit-details-marker { display: none; }
+.form-avanzado > summary::before { content: '+ '; }
+.form-avanzado[open] > summary::before { content: '– '; }
+
+/* Pie del formulario */
+.form-pie {
+  display: flex; gap: 12px; justify-content: flex-end;
+  margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--linea);
+  flex-wrap: wrap;
+}
+@media (max-width: 560px) { .form-pie .btn { flex: 1; } }
+
+/* Modal de confirmación de borrado (más chico) */
+.confirm-caja { max-width: 440px !important; padding: 30px 28px; text-align: center; }
+.confirm-caja h2 { font-size: 1.35rem; margin: 8px 0 10px; }
+.confirm-caja p { color: var(--tx-2); margin: 0 0 24px; }
+.confirm-caja p b { color: var(--hueso); }
+.confirm-acciones { display: flex; gap: 12px; }
+.confirm-acciones .btn { flex: 1; }
+.btn--peligro { --btn-bg: var(--rojo); --btn-tx: var(--hueso); --btn-bd: var(--rojo); }
+.btn--peligro:hover { --btn-bg: var(--rojo-alto); --btn-bd: var(--rojo-alto); }
